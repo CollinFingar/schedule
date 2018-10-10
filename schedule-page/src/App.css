@@ -3,7 +3,15 @@
   margin-top: 20px;
 }
 .ScheduleTitle{
-  color: white;
+  width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+}
+.ScheduleTitle .Text{
+  background-color:white;
+  padding:0 10px; 
 }
 .AppContainer{
   padding: 15px;
@@ -16,6 +24,8 @@
 .EasternExplain{
   font-size: 14px;
   text-align: left;
+  color: #888888;
+  font-style: italic;
 }
 
 .FindNetwork{
@@ -25,6 +35,9 @@
 .TVIcon{
   height: 15px;
   margin-right: 10px;
+}
+.Divider{
+  height: 50px;
 }
 .Credits{
   margin-top:10px;

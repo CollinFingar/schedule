@@ -1,0 +1,30 @@
+{
+    "series": [
+        {
+            "team1": {
+                "name": "name",
+                "abb": "nme",
+                "other": "other"
+            },
+            "team2": {
+                "name": "name",
+                "abb": "nme",
+                "other": "other"
+            },
+            "games": [
+                {
+                    
+                }
+            ],
+            "completedGames": [
+                0,1
+            ],
+            "ongoingGames": [
+                2
+            ],
+            "futureGames": [
+                3,4
+            ]
+        }
+    ]
+}
