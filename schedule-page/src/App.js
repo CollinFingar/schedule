@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   retrieveData(){
-    axios.get(DataService.urls.Data)
+    axios.get(DataService.urls.Data, { crossdomain: true })
       .then(res => {
         this.transformData(res);
         console.log("Updating Data");
