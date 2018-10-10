@@ -5,11 +5,15 @@ import Schedule from './Schedule';
 
 import './App.css';
 import tv from './icons/tv-solid.svg';
+import calendar from './icons/calendar-alt-regular.svg';
+import list from './icons/list-ol-solid.svg';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      dates: [],
+      closestDateIndex: 0,
       data: {},
       series: {},
       filter: "Date",
@@ -51,6 +55,10 @@ class App extends Component {
     var set = new Set();
     var seriesOrder = [];
     var datesOrder = {};
+    var dates = [];
+    var closestDate = games[0].date;
+    var closestDateIndex = 0;
+    var dateNeedsToBeSet = true;
     games.sort(function(a,b){
       if(a.date > b.date){
         return 1
@@ -58,15 +66,27 @@ class App extends Component {
       return -1;
     })
     for(var g = 0; g < games.length; g++){
-      // console.log(games[g].date);
+      
       var date = games[g].date;
       var dateString = DataService.weekDays[date.getDay()]+", "+DataService.months[date.getMonth()]+" "+date.getDate();
+      var state = games[g].data.status.abstractGameState;
+      if((state === "Live" || state === "Preview") && dateNeedsToBeSet ){
+        dateNeedsToBeSet = false;
+        closestDate = dateString;
+        closestDateIndex = dates.length;
+      }
+      if(dates.length > 0){
+        if(dates[dates.length-1] !== dateString){
+          dates.push(dateString);
+        }
+      } else {
+        dates.push(dateString);
+      }
       if(datesOrder[dateString] !== null && datesOrder[dateString] !== undefined){
         datesOrder[dateString].push(g);
       } else {
         datesOrder[dateString] = [g];
       }
-      // console.log(dateString);
 
       var sIndex = games[g].seriesIndex;
       if(!set.has(sIndex)){
@@ -74,12 +94,11 @@ class App extends Component {
         seriesOrder.push(sIndex);
       }
     }
-    // console.log(seriesOrder);
-    console.log(res.data);
     this.setState({ 
+                    dates: dates,
+                    closestDateIndex: closestDateIndex,
                     data: res.data,
                     series: res.data.series,
-                    filter: this.state.filter,
                     games: games,
                     seriesOrder: seriesOrder,
                     datesOrder: datesOrder
@@ -88,29 +107,15 @@ class App extends Component {
   }
 
   filterByRound = () => {
-    console.log("Filtering By Round");
-    this.setState({ 
-      data: this.state.data,
-      series: this.state.series,
-      filter: "Round",
-      games: this.state.games,
-      seriesOrder: this.state.seriesOrder,
-      datesOrder: this.state.datesOrder
+    this.setState({
+      filter: "Round"
     });
-    console.log(this.state);
   }
 
   filterByDate = () => {
-    console.log("Filtering By Date");
-    this.setState({ 
-      data: this.state.data,
-      series: this.state.series,
-      filter: "Date",
-      games: this.state.games,
-      seriesOrder: this.state.seriesOrder,
-      datesOrder: this.state.datesOrder
+    this.setState({
+      filter: "Date"
     });
-    console.log(this.state);
   }
 
   render() {
@@ -135,15 +140,16 @@ class App extends Component {
 
           <div className="btn-group btn-group-toggle" data-toggle="buttons">
             <label className="btn btn-secondary active" onClick={this.filterByDate}>
-              <input type="radio" name="options" id="option1" autoComplete="off"  checked/> By Date
+              <input type="radio" name="options" id="option1" autoComplete="off"  checked/><img src={calendar} alt="" className="ToggleIcon"/> By Date
             </label>
             <label className="btn btn-secondary" onClick={this.filterByRound}>
-              <input type="radio" name="options" id="option2" autoComplete="off" /> By Round
+              <input type="radio" name="options" id="option2" autoComplete="off" /><img src={list} alt="" className="ToggleIcon"/> By Round
             </label>
           </div>
           <div className="Divider"></div>
           <Schedule series={this.state.data.series} games={this.state.games} filter={this.state.filter} 
-                  seriesOrder={this.state.seriesOrder} datesOrder={this.state.datesOrder}></Schedule>
+                  seriesOrder={this.state.seriesOrder} datesOrder={this.state.datesOrder}
+                  dates={this.state.dates} closestDateIndex={this.state.closestDateIndex}></Schedule>
         </div>
         <div className="Credits">Created by Collin Fingar</div>
       </div>

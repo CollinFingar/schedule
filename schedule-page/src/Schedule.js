@@ -30,7 +30,7 @@ class Schedule extends Component {
     return(
           <div>
             {this.props.seriesOrder.map((s) =>
-                <div>{this.props.series[s].series.id}</div>
+                <div>{this.props.series[s].series.id + " " + this.props.closestDateIndex}</div>
   
             )}
           </div>

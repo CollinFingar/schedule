@@ -1,6 +1,7 @@
 {
   "name": "schedule-page",
   "version": "0.1.0",
+  "homepage": "http://www.collinfingar.com/schedule/",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",

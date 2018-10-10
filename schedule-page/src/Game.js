@@ -47,7 +47,7 @@ class Game extends Component {
            <div className="Date">{dateString + " "}<span className="Time">{this.renderStatus(g, g.status.abstractGameState)}</span></div>
           </div>
           <div className="col-3 TeamScore">
-            {this.renderTeams(g, stateMessage)}
+            {this.renderTeams(g, stateMessage, false)}
           </div>
           <div className="col-5 Extra">
             {this.renderExtra(g, stateMessage)}
@@ -67,7 +67,7 @@ class Game extends Component {
            <div className="Date">{dateString + " "}<span className="Time">{this.renderStatus(g, g.status.abstractGameState)}</span></div>
           </div>
           <div className="col-6 TeamScore">
-            {this.renderTeams(g, stateMessage)}
+            {this.renderTeams(g, stateMessage, true)}
           </div>
           <div className="col-1">
             <img src={caret} className="MobileCaret"/>
@@ -85,7 +85,7 @@ class Game extends Component {
       </div>
     )
   }
-  renderTeams(g, stateMessage){
+  renderTeams(g, stateMessage, mobile){
     var homeName = g.teams.home.team.teamName;
     var awayName = g.teams.away.team.teamName;
     var homeURL = "https://www.mlb.com/"+homeName.toLowerCase().replace(/ /g,'');
@@ -101,12 +101,29 @@ class Game extends Component {
     }
     
     if(stateMessage === "Preview"){
+      if(mobile){
+        return (
+          <div>
+            <div className="TeamScore"><a href={awayURL} target="_blank">{awayName}</a></div>
+            <div>{"@ "}<a href={homeURL} target="_blank">{homeName}</a></div>
+          </div>
+        )
+      }
       return (
         <span className="TeamScore"><a href={awayURL} target="_blank">{awayName}</a>{" @ "}<a href={homeURL} target="_blank">{homeName}</a></span>
       )
     } else {
       var awayScore = g.teams.away.score;
       var homeScore = g.teams.home.score;
+      if(mobile){
+        return (
+          <div>
+            <div className="TeamScore"><a href={awayURL} target="_blank">{awayName}</a>{" "+awayScore}</div>
+            <div>{"@ "}<a href={homeURL} target="_blank">{homeName}</a>{" " + homeScore}</div>
+          </div>
+        )
+      }
+      
       return (
         <span className="TeamScore"><a href={awayURL} target="_blank">{awayName}</a>{" " + awayScore + " @ "}<a href={homeURL} target="_blank">{homeName}</a>{ " " + homeScore}</span>
       )
