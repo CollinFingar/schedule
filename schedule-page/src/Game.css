@@ -1,0 +1,59 @@
+.Game{
+    height: 50px;
+    padding-top:12px;
+    padding-bottom:12px;
+    font-weight: 500;
+}
+.Date{
+    text-align: left;
+}
+.Time{
+    color: #888888;
+}
+.Extra{
+    text-align: left;
+    font-weight: 400;
+}
+
+.MediaSection{
+    text-align: right;
+}
+.MediaSectionMobile{
+    text-align: left;
+}
+.NetworkIcon{
+    width:30px;
+}
+.NetworkIconLarge{
+    width:50px;
+}
+.GamedayIcon{
+    height:20px;
+    cursor:pointer;
+    margin-left:10px;
+}
+.TeamScore{
+    text-align: left;
+}
+.MobileGameBody{
+    cursor: pointer;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:14px;
+}
+.MobileCaret{
+    height:10px;
+}
+
+.underrow{
+    margin-top:10px;
+}
+.test{
+    background-color:green;
+}
+
+
+
+A:link { text-decoration: none }
+A:active { text-decoration: none }
+A:visited { text-decoration: none }

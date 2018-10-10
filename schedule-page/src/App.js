@@ -4,7 +4,7 @@ import DataService from './DataService'
 import Schedule from './Schedule';
 
 import './App.css';
-import tv from './icons//tv-solid.svg';
+import tv from './icons/tv-solid.svg';
 
 class App extends Component {
   constructor(props){
