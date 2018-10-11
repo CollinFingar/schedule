@@ -20,7 +20,7 @@
 }
 .CurrentSeriesStatus{
     margin-top:-20px;
-    color: #077fb7;
+    color: #777777;
     margin-bottom: 10px;
 }
 
@@ -57,4 +57,29 @@
     margin-top:-10px;
     color: #077fb7;
     margin-bottom: 10px;
+}
+
+.DateHeader{
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:left;
+}
+.DateSectionTitle{
+    width: 100%; 
+     text-align: center; 
+     border-bottom: 1px solid #777; 
+     line-height: 0.1em;
+     margin: 10px 0 20px;
+     margin-bottom:60px;
+    margin-top: 60px;
+  }
+.DateSectionTitle .Text{
+    
+    color: #777;
+    font-size: 20px;
+    background-color: #f8f9fa;
+    padding:0 10px;
+    padding-bottom:30px;
+    padding-top: 30px;
 }

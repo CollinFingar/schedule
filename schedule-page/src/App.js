@@ -8,6 +8,10 @@ import tv from './icons/tv-solid.svg';
 import calendar from './icons/calendar-alt-regular.svg';
 import list from './icons/list-ol-solid.svg';
 
+/**
+ * This component sets up the page for the Schedule component housed
+ * inside at the bottom.
+ */
 class App extends Component {
   constructor(props){
     super(props);
@@ -23,12 +27,18 @@ class App extends Component {
     }
   }
 
+  /**
+   * After the component is mounted, retrieve data from the endpoint
+   */
   componentDidMount() {
     this.retrieveData();
     setInterval(function(){
       this.retrieveData()}.bind(this), 10000);
   }
 
+  /**
+   * Retrieves data from the url using "axios"
+   */
   retrieveData(){
     axios.get(DataService.urls.Data, { crossdomain: true })
       .then(res => {
@@ -37,9 +47,16 @@ class App extends Component {
       })
   }
 
+  /**
+   * After data retrieval, it is transformed into a more useable form for
+   * the children components.
+   * Sets up dates for the date filter, the correct series order, and more.
+   * @param {data} res 
+   */
   transformData(res){
     var data = res.data;
     var games = [];
+    // Loops through sereis and adds games to array for date filter
     for(var s = 0; s < data.series.length; s++){
       var seriesGames = data.series[s].games;
       for(var g = 0; g < seriesGames.length; g++){
@@ -59,14 +76,16 @@ class App extends Component {
     var closestDate = games[0].date;
     var closestDateIndex = 0;
     var dateNeedsToBeSet = true;
+    // Sorts games by date
     games.sort(function(a,b){
       if(a.date > b.date){
         return 1
       }
       return -1;
     })
+    // Loops through sorted games and sets closest date,
+    // the correct series order, and more.
     for(var g = 0; g < games.length; g++){
-      
       var date = games[g].date;
       var dateString = DataService.weekDays[date.getDay()]+", "+DataService.months[date.getMonth()]+" "+date.getDate();
       var state = games[g].data.status.abstractGameState;
@@ -94,6 +113,8 @@ class App extends Component {
         seriesOrder.push(sIndex);
       }
     }
+    // Set the state using the transformed data. This will be passed to the chil
+    // components
     this.setState({ 
                     dates: dates,
                     closestDateIndex: closestDateIndex,
@@ -103,21 +124,33 @@ class App extends Component {
                     seriesOrder: seriesOrder,
                     datesOrder: datesOrder
                   });
-    console.log(this.state);
+    // console.log(this.state);
   }
 
+  /**
+   * Set the filter mode to "By Round"
+   */
   filterByRound = () => {
     this.setState({
       filter: "Round"
     });
   }
 
+  /**
+   * Set the filter mode to "By Date"
+   */
   filterByDate = () => {
     this.setState({
       filter: "Date"
     });
   }
 
+  /**
+   * Render the app
+   * Creates network and time info at top,
+   * toggle buttons,
+   * and the "Schedule" component which does the rest.
+   */
   render() {
     return (
       <div className="App">

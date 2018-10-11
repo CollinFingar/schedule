@@ -1,3 +1,8 @@
+/**
+ * This Service stores links, has conversions for week days, months, etc,
+ * has a map to replace certain series names, and delivers urls based on
+ * ids being passed.
+ */
 class DataService {
     constructor() {
       this.urls = {
@@ -23,6 +28,15 @@ class DataService {
       }
       this.months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
       this.weekDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
+      this.fullWeekDays = {
+        "Sun": "Sunday",
+        "Mon": "Monday",
+        "Tue": "Tuesday",
+        "Wed": "Wednesday",
+        "Thur": "Thursday",
+        "Fri": "Friday",
+        "Sat": "Saturday"
+      }
       this.seriesMap = {
         "NLTB": "NL Tiebreaker",
         "NLWC": "NL Wild Card",

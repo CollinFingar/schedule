@@ -1,6 +1,9 @@
 .App {
   text-align: center;
   margin-top: 20px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .ScheduleTitle{
   width: 100%; 
